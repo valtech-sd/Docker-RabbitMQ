@@ -35,6 +35,12 @@ Do the following to quickly get up and running with this server.
 
 ## Stack Details
 
+### RabbitMQ Version
+
+The file **docker-compose.yml** includes a parameter **RMQ_VERSION_TAG:** which will determine the version of
+RabbitMQ that will be used. Update that to suit your needs. You can find versions on the official Docker Image page
+https://hub.docker.com/_/rabbitmq/.
+
 ### RabbitMQ Server Details
 
 The RabbitMQ Server in this stack provides a RabbitMQ Core with standard AMQP. TLS certificates are not provided, 

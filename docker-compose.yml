@@ -18,7 +18,7 @@ services:
       # with the arguments passed.
       context: rabbitmq/
       args: 
-        RMQ_VERSION_TAG: 3.8-management
+        RMQ_VERSION_TAG: 3.9.3-management
     # Set a hostname and container name for the container
     hostname: docker-rmq.local
     container_name: docker-rmq.local
