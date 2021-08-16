@@ -1,0 +1,43 @@
+---
+- hosts: local
+  connection: local
+
+  vars:
+    - provisioning_path: '/tmp/provisioning'
+
+  tasks:
+
+    #
+    # Begin RMQ Provisioning
+    #
+
+    # Ensure the guest user is removed
+    - name: Ensure the RMQ guest user is not present.
+      rabbitmq_user:
+        user: guest
+        state: absent
+
+    - name: Verify the 'rmqadmin' user exists and force update the password.
+      rabbitmq_user:
+        user: rmqadmin
+        password: "{{ lookup('password', '/tmp/secrets/rmqadmin-password length=15 chars=ascii_letters,digits') }}"
+        update_password: always
+        tags: administrator
+        vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+        state: present
+
+    - name: Verify the 'rmquser' user exists and force update the password.
+      rabbitmq_user:
+        user: rmquser
+        password: "{{ lookup('password', '/tmp/secrets/rmquser-password length=15 chars=ascii_letters,digits') }}"
+        update_password: always
+        tags: 
+        vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+        state: present
+

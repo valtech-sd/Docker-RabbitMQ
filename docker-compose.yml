@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+
+  # This is a RabbitMQ Container that will run RMQ.
+
+  rabbitmq:
+    # Setup environment variables. 
+    # Supported variables by the image are discussed
+    # here: https://hub.docker.com/_/rabbitmq/
+    environment:
+      PROVISIONING_CONTAINER_PATH: /tmp/provisioning
+      RABBITMQ_LOGS: /var/log/rabbitmq/rabbit.log
+      RABBITMQ_SASL_LOGS: /var/log/rabbitmq/rabbit-sasl.log
+    image: docker-rmq
+    build:
+      # Build from the rabbitmq/ folder provided in the repo.
+      # with the arguments passed.
+      context: rabbitmq/
+      args: 
+        RMQ_VERSION_TAG: 3.8-management
+    # Set a hostname and container name for the container
+    hostname: docker-rmq.local
+    container_name: docker-rmq.local
+    # Ensure the container restarts on boot
+    restart: always
+    logging:
+      options:
+        labels: docker-rmq.local
+    ports:
+      - '5671:5671'   # AMQPS (AMQP over TLS)
+      - '15671:15671' # Management TLS
+    # Bind volumes to the host
+    volumes:
+      # Controls which RMQ plugins are enabled
+      - type: bind
+        source: ./rabbitmq/config/enabled_plugins.erl
+        target: /etc/rabbitmq/enabled_plugins
+        read_only: true
+      # Passes a custom RMQ Config
+      - type: bind
+        source: ./rabbitmq/config/rabbitmq.conf
+        target: /etc/rabbitmq/rabbitmq.conf
+        read_only: true
+      # Map a volume for the RMQ Certs
+      - type: bind
+        source: ./rabbitmq/config/certs
+        target: /etc/rabbitmq/certs
+        read_only: true
+      # Sets up a place to hold our automated provisioning
+      - type: bind
+        source: ./rabbitmq/provisioning
+        target: /tmp/provisioning
+        read_only: true
+      # Sets up a location to hold RMQ Secrets
+      - type: bind
+        source: ./rabbitmq-secrets
+        target: /tmp/secrets
+      # Sets up a location for RMQ logs to live
+      - type: bind
+        source: ./rabbitmq/logs
+        target: /var/log/rabbitmq

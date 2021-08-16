@@ -1,0 +1,63 @@
+[ ca ]
+default_ca = test_root_ca
+
+[ test_root_ca ]
+root_ca_dir = testca
+
+certificate   = $root_ca_dir/cacert.pem
+database      = $root_ca_dir/index.txt
+new_certs_dir = $root_ca_dir/certs
+private_key   = $root_ca_dir/private/cakey.pem
+serial        = $root_ca_dir/serial
+
+default_crl_days = 7
+default_days     = 1825
+default_md       = sha256
+
+policy          = test_root_ca_policy
+x509_extensions = certificate_extensions
+
+[ test_root_ca_policy ]
+commonName = supplied
+stateOrProvinceName = optional
+countryName = optional
+emailAddress = optional
+organizationName = optional
+organizationalUnitName = optional
+domainComponent = optional
+
+[ certificate_extensions ]
+basicConstraints = CA:false
+
+[ req ]
+default_bits       = 4096
+default_md         = sha256
+prompt             = yes
+distinguished_name = root_ca_distinguished_name
+x509_extensions    = root_ca_extensions
+
+[ root_ca_distinguished_name ]
+commonName = hostname
+
+[ root_ca_extensions ]
+basicConstraints = CA:true
+keyUsage         = keyCertSign, cRLSign
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints = critical,CA:true
+
+[ ca_extensions ]
+basicConstraints = CA:true
+keyUsage         = keyCertSign, cRLSign
+
+[ client_extensions ]
+basicConstraints = CA:false
+keyUsage         = digitalSignature
+extendedKeyUsage = clientAuth
+
+[ server_extensions ]
+basicConstraints = CA:false
+keyUsage         = keyEncipherment
+extendedKeyUsage = serverAuth
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
