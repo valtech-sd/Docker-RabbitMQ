@@ -8,6 +8,10 @@ The stack includes:
 
 * A RabbitMQ server.
 
+## Credit
+
+This repo is based on the official RabbitMQ Docker image available at https://hub.docker.com/_/rabbitmq/.
+
 ## Quick Start
 
 Do the following to quickly get up and running with this server.
@@ -48,7 +52,12 @@ please see our [RabbitMQ primer](README-RabbitMQ-Primer.md).
 > **Note:** You can install more plugins by editing the file /\[repo-root\]/rabbitmq/config/enabled_plugins.erl. Learn
 > more about RabbitMQ plugins on the [RabbitMQ Plugins](https://www.rabbitmq.com/plugins.html) page.
 
-This Docker image is based on https://hub.docker.com/_/rabbitmq.
+### RabbitMQ Configuration
+
+The instance of RabbitMQ created by this image is configured via the file rabbitmq.conf in the /rabbitmq/config/ directory
+of this repository. The configuration provided here is fairly basic but it can be fully customized to suit your needs.
+
+Please refer to [RabbitMQ's Configuration page](https://www.rabbitmq.com/configure.html) for the full details!
 
 ## Stack Dependencies
 
