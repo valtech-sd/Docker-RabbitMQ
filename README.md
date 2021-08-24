@@ -33,6 +33,12 @@ Do the following to quickly get up and running with this server.
  1. Don't forget to stop the stack once you are done. From the root of the repo, you can run `docker compose down --volumes`
     to bring down the stack.
 
+## Example Client Code (Connecting to RMQ)
+
+We invite you to visit our other repository, [AMQP Cacoon](https://github.com/valtech-sd/amqp-cacoon), a NodeJS package that facilitates connecting to RabbitMQ
+from NodeJS. This repo contains the library and also several examples that demonstrate how to work with an AMQP host
+and how to use TLS when connecting.
+
 ## Stack Details
 
 ### RabbitMQ Version
@@ -202,7 +208,7 @@ None.
 ### Stack Configuration
 
 Configuration for the stack can be added to the `.env` file. Any variables in that file will be available to use in 
-other stack files as `${ENV_VAR_NAME}`.
+other stack files as `${ENV_VAR_NAME}`. You can also edit other variables in `docker-compose.yml`.
 
 ### Docker Build
 
@@ -272,13 +278,17 @@ RabbitMQ Clients should connect on the TLS port 5671 as they would to any normal
 
 Authentication is required for all connections.
 
-> **Note:** For the users and passwords, look in **rabbitmq-secrets/**. To start up RMQ with different users/passwords, you can edit the values in the **rabbitmq-secrets** files and repeat the _up_ process. If you delete the files in **rabbitmq-secrets** new random passwords will be created for the configured users!
+> **Note:** For the users and passwords, look in **rabbitmq-secrets/**. To start up RMQ with different users/passwords, 
+> you can edit the values in the **rabbitmq-secrets** files and repeat the _up_ process. If you delete the files 
+> in **rabbitmq-secrets** new random passwords will be created for the configured users!
 
 ### RabbitMQ Management
 
 After the RMQ server is up, you can see the management console at:
 
 * https://localhost:15671/#/
+
+(You might need to accept your browser's warnings about SSL Security if you're using a self-signed TLS cert.)
 
 The login for the console is:
 u: rmqadmin

@@ -28,8 +28,9 @@ services:
       options:
         labels: docker-rmq.local
     ports:
+      # - '5672:5672'   # AMQP (no TLS) # Should be COMMENTED OUT / DISABLED to require AMQPS!
       - '5671:5671'   # AMQPS (AMQP over TLS)
-      - '15671:15671' # Management TLS
+      - '15671:15671' # Management Dashboard over TLS (https://localhost:15671)
     # Bind volumes to the host
     volumes:
       # Controls which RMQ plugins are enabled

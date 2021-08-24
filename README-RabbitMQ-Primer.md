@@ -4,6 +4,19 @@
 
 This document covers some basic concepts about RabbitMQ.
 
+## Quick Start
+
+Once you have a RabbitMQ host up, you can connect to the management console via https://localhost:15671/. You might have
+to accept your browser's security warning if you are using a self-signed TLS certificate.
+
+From the RabbitMQ management console you can:
+
+* See the status of the server, including resource usage.
+* Create exchanges, queues and bindings.
+* Publish messages into any exchange or queue.
+* Consume messages from any queue.
+* And more...
+
 ## What is RabbitMQ?
 
 RabbitMQ is an application message broker typically used in applications that rely on message patterns (applications that send messages to each other). Message brokers are sometimes also referred to as message bus, or even enterprise message bus. 
@@ -69,4 +82,4 @@ In addition to the **AMQP Protocol**, RabbitMQ also supports several other proto
 * STOMP over Websockets (Web STOMP) - brings the support of the STOMP protocol to clients needing a websocket connection (HTML for example.)
   * Other than how clients connect to Web STOMP, this protocol is identical in features to STOMP.
   * RabbitMQ's implementation of Web STOMP is discussed on the [RabbitMQ Web STOMP Plugin](https://www.rabbitmq.com/web-stomp.html).
-
+  
