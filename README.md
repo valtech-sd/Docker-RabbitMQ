@@ -180,7 +180,7 @@ Alternatively, you can do a local BUILD from a Docker compose configuration.
 Once you have your image(s) ready, export them with:
 
 ```bash
-$ sudo docker save -o /path/to/your/image/universal-snw-docker-rmq.docker universal-snw-docker-rmq
+$ sudo docker save -o /path/to/your/image/docker-rmq.docker docker-rmq
 ```
 
 (Note, on macOS, omit the **sudo** from the above command.)
@@ -188,7 +188,7 @@ $ sudo docker save -o /path/to/your/image/universal-snw-docker-rmq.docker univer
 Zip then transfer the file to the offline computer. Once there, unzip then load the image from the file:
 
 ```bash
-sudo docker load -i /path/to/your/image/universal-snw-docker-rmq.docker
+sudo docker load -i /path/to/your/image/docker-rmq.docker
 ```
 
 You can verify with:
